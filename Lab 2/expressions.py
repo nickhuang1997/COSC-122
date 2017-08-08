@@ -66,14 +66,36 @@ def evaluate_postfix(expression):
     # Split postfix string into tokens. For example:
     #  '2 3 +' => ['2', '3', '+']
     # Don't worry about how this works
+    s = Stack()
+    
+    
     tokens = re.findall(r'(\d+|\*|\+|\/|\-|\)|\(|\^)', expression)
-
+    
+    
+#    operands =['1', '2', '3', '4', '5', '6', '7', '8', '9', '0']
+#    
+#    operator =['(', ')', '*', "+", '/', '-']
+#    
+#    for i in range(len(tokens)):
+#        if tokens[i] in operands:
+#            return tokens[i]
+#        
+#        elif tokens[i] == '(':
+#            s.push(tokens[i])
+#        
+#        elif tokens[i] == ')':
+#            s.pop(tokens[i-1])
+#            
+#        elif tokens[i] in operator:
+#            s.pop(tokens[])
+#            s.push(tokens[i])
+    
     # NOTE: Intermediate values may be floats (eg, 3/4 gives 0.75)
     # so don't cast anything to int after the input phase.
 
     # Code to evaluate the postfix expression and return the result goes here
     # ---start student section---
-    pass
+    
     # ===end student section===
 
 
@@ -185,7 +207,7 @@ def evaluate_prefix(prefix_expression):
 
 
 
-if __name__ == '__main__':
+#if __name__ == '__main__':
     #os.environ['TERM'] = 'linux' # Suppress ^[[?1034h
 
     # Uncomment the call to testmod to run the tests
@@ -193,9 +215,8 @@ if __name__ == '__main__':
     # doctest.testmod()
 
     # Or you can test each thing separately
-    doctest.run_docstring_examples(calculate, None)
+    #    doctest.run_docstring_examples(calculate, None)
     # doctest.run_docstring_examples(evaluate_postfix, None)
     # doctest.run_docstring_examples(infix_to_postfix, None)
     # doctest.run_docstring_examples(evaluate_infix, None)
     # doctest.run_docstring_examples(evaluate_prefix, None)
-
