@@ -25,6 +25,7 @@ class FreqNode(object):
     >>> print(f)
     'c' = 2
     """
+    
 
     def __init__(self, item, frequency=1):
         self.item = item
@@ -67,7 +68,22 @@ class FreqList(object):
         """
 
         # ---start student section---
-        pass
+        
+        temp = self.head
+        
+        
+        if temp.item == item:
+            return self.frequency
+        
+        else:
+            while temp.item != item:
+                temp = temp.next_node
+                    
+                if temp.item == item:
+                    return self.frequency
+            return 0
+        
+                
         # ===end student section===
 
     def get_xy_for_plot(self):
@@ -159,7 +175,25 @@ class UnsortedFreqList(FreqList):
           2:  'a' = 2
         """
         # ---start student section---
-        pass
+        
+        #move along linked list, if head = new item, increment
+        #if head falls off the end, then create new node with new item
+        
+        #if this value is not in FreqList
+        
+        node = self.head
+        while node is not None:
+            if node.item == new_item:
+                node.increment()
+                return
+            node = node.next_node
+        
+        node = FreqNode(new_item)
+        oldnode = self.head
+        self.head = node
+        self.head.next_node = oldnode
+        
+            
         # ===end student section===
 
     def __str__(self):
@@ -208,7 +242,24 @@ class NicerUnsortedFreqList(FreqList):
           2:  'b' = 1
         """
         # ---start student section---
-        pass
+        
+        if self.head is None:
+                self.head = FreqNode(new_item)
+        else:
+            temp = self.head
+            
+            while temp.next_node is not None:   #while there is still a node next...                
+                if temp.item == new_item:   #Adds +1 to Freq if item is in list
+                    temp.increment()
+                    return
+                temp = temp.next_node
+            
+            if temp.item == new_item:   #Adds +1 to Freq if item is in list
+                temp.increment()
+                return
+            else:   
+                temp.next_node = FreqNode(new_item) # Make the 
+                 
         # ===end student section===
 
     def __str__(self):
@@ -265,6 +316,7 @@ class SortedFreqList(FreqList):
     def add(self, new_item):
         """
         If the list is empty then make a new FreqNode and insert it at head.
+        
         If the new_item is not already in freq list then adds the given
         item with a frequency of 1 as a FreqNode object to the end of the list.
 
@@ -338,8 +390,37 @@ class SortedFreqList(FreqList):
         """
         # make sure you read the docstring for this method!
         # ---start student section---
-        pass
-        # ===end student section===
+        
+        
+        if self.head == None:
+            self.head = FreqNode(new_item)         
+        else:
+            current = self.head
+            found = False
+            previous = None         
+            while current.next_node is not None and not found:    #while there is still a node next
+                if current.item == new_item:        #if incremented data is same as new data
+                    previous.increment()             #add one to frequency
+                    found = True
+                    
+                    if previous is None:
+                        pass
+                    
+                    elif current.frequency > previous.frequency:
+                        previous.next_node = current.next_node
+                        current.next_node = None
+                        self._insert_in_order(current)                        
+                previous = current
+                current = current.next_node
+
+            if not found:
+                previous.next_node = FreqNode(new_item)                    
+                
+            
+        #POINT PREV TO NEXT, THE REINSERT
+        
+      
+#        # ===end student section===
 
     def __str__(self):
         """ Basically returns the frequencies as per FreqList
@@ -478,12 +559,12 @@ def run_tests(filename, verbose=True):
 
     # Uncomment lines for tests that you want to run
     # you can run one after the other if you like...
-    # run_settings.append((UnsortedFreqList, 1, verbose))
-    # run_settings.append((NicerUnsortedFreqList, 1, verbose))
-    # run_settings.append((SortedFreqList, 1, verbose))
-    # run_settings.append((UnsortedFreqList, 2, verbose))
-    # run_settings.append((NicerUnsortedFreqList, 2, verbose))
-    run_settings.append((SortedFreqList, 2, verbose))
+    #run_settings.append((UnsortedFreqList, 1, verbose))
+    #run_settings.append((NicerUnsortedFreqList, 2, verbose))
+    #run_settings.append((SortedFreqList, 1, verbose))
+    #run_settings.append((UnsortedFreqList, 2, verbose))
+    #run_settings.append((NicerUnsortedFreqList, 2, verbose))
+#    run_settings.append((SortedFreqList, 2, verbose))
     # run_settings.append((SortedFreqList, 3, verbose))
 
     for list_type, num_chars, verbose in run_settings:
@@ -514,15 +595,14 @@ if __name__ == '__main__':
     os.environ['TERM'] = 'linux'  # Suppress ^[[?1034h
 
     # Uncomment the next line to run the doctests
-    # doctest.testmod()
+    doctest.testmod()
     # Can enter an infinite loop if something isn't implemented correctly
     # So test on small data file first
 
     # Uncomment the files you want to test
     # ------------------------------------
-    # run_tests("le_rire.txt", verbose=True)         # smallest corpus
-    run_tests("ulysses.txt", verbose=True)         # medium corpus
+#    run_tests("le_rire.txt", verbose=True)         # smallest corpus
+    #run_tests("ulysses.txt", verbose=True)         # medium corpus
     # run_tests("war_and_peace.txt", verbose=True)   # one of the longest books in english
     #
     # Be sure to look at run_tests and run_a_test to see how the tests work
-

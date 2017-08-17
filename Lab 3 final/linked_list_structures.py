@@ -56,7 +56,7 @@ class Stack(object):
         self.head = None
         
         
-    def push(self,item):
+    def push(self, item):
         """push a new item on to the stack
         inserts item at head of list
         """
@@ -76,7 +76,7 @@ class Stack(object):
         # raise IndexError("Can't pop from empty stack.")
         # ---start student section---
         
-        if self.is_empty() == True:
+        if self.is_empty():
             raise IndexError("Can't pop from empty stack.")
         
         else:
@@ -95,7 +95,7 @@ class Stack(object):
         # use the following line to raise error when stack is empty
         # raise IndexError("Can't peek at empty stack.")
         # ---start student section---
-        if self.is_empty() == True:
+        if self.is_empty():
             raise IndexError("Can't peek at empty stack.")
         else:
             return self.head.data
@@ -109,10 +109,10 @@ class Stack(object):
         """ Returns the length --- calling len(s) will invoke this method """
         # ---start student section---
         count = 0 
-        a = self.head
-        while a is not None:
+        temp = self.head
+        while temp is not None:
             count += 1
-            a = a.next_node
+            temp = temp.next_node
         
         return count
         # ===end student section===
@@ -125,29 +125,29 @@ class Stack(object):
         """
         # ---start student section---
         
-        x = []
-        y = self.head
-        while y is not None:
-            x.append(str(y.data))
-            y = y.next_node
-        x.append('None')
-        return 'List for stack is: ' + (' -> '.join(x))
+        listdata = []
+        temp = self.head
+        while temp is not None:
+            listdata.append(str(temp.data))
+            temp = temp.next_node
+        listdata.append('None')
+        return 'List for stack is: ' + (' -> '.join(listdata))
     
         
         # ===end student section===
 
-
+#    >>> len(q)
+#    0
+#    >>> print(q)
+#    List for queue is: None
+#    >>> result = q.dequeue()
+#    Traceback (most recent call last):
+#    ...
+#    IndexError: Can't dequeue from empty queue.
 class Queue(object):
     """ Implements a Queue using a Linked List"
     >>> q = Queue()
-    >>> len(q)
-    0
-    >>> print(q)
-    List for queue is: None
-    >>> result = q.dequeue()
-    Traceback (most recent call last):
-    ...
-    IndexError: Can't dequeue from empty queue.
+
     >>> q.enqueue('a')
     >>> print(q)
     List for queue is: a -> None
@@ -170,17 +170,22 @@ class Queue(object):
 
     def __init__(self):
         self.head = None
+        self.tail = None
 
     def enqueue(self, item):
         """Add an item onto the tail of the queue."""
         # ---start student section---
         #while current.nextnode is not none...
         # then change current to equal current.nextnode
-        if self.head is None:
+        
+        if self.is_empty():
             self.head = Node(item)
         else:
-            a = self.head.next_node
-                
+            temp = self.head
+            while temp.next_node is not None:
+                temp = temp.next_node
+            temp.next_node = Node(item)
+#                
         # ===end student section===
 
     def dequeue(self):
@@ -190,7 +195,7 @@ class Queue(object):
         # use the following line to raise error when queue is empty
         # raise IndexError("Can't dequeue from empty queue.")
         # ---start student section---
-        if self.is_empty() == True:
+        if self.is_empty():
             raise IndexError("Can't dequeue from empty queue.")
         
         else:
@@ -209,10 +214,10 @@ class Queue(object):
         """ Returns the length --- calling len(q) will invoke this method """
         # ---start student section---
         count = 0 
-        a = self.head
-        while a is not None:
+        temp = self.head
+        while temp is not None:
             count += 1
-            a = a.next_node
+            temp = temp.next_node
         
         return count        
         # ===end student section===
@@ -224,13 +229,13 @@ class Queue(object):
         See doctests in class docstring
         """
         # ---start student section---
-        x = []
-        y = self.head
-        while y is not None:
-            x.append(str(y.data))
-            y = y.next_node
-        x.append('None')
-        return 'List for queue is: ' + (' -> '.join(x))        
+        listdata = []
+        temp = self.head
+        while temp is not None:
+            listdata.append(str(temp.data))
+            temp = temp.next_node
+        listdata.append('None')
+        return 'List for queue is: ' + (' -> '.join(listdata))       
         # ===end student section===
 
 
@@ -239,3 +244,4 @@ if __name__ == '__main__':
     # Uncomment the testmod() line to run the tests
     # Can enter an infinite loop if your Stack isn't implemented correctly
     doctest.testmod()
+
