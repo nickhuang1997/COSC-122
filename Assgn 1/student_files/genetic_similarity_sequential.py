@@ -10,7 +10,7 @@ To find how many genes are in common, we use the naive sequential approach.
 from classes import GeneList
 
 ## Uncomment the following line to be able to make your own testing Genes
-# from classes import Genome, Gene
+from classes import Genome, Gene
 
 
 def genetic_similarity_sequential(first_genome, second_genome):
@@ -21,6 +21,7 @@ def genetic_similarity_sequential(first_genome, second_genome):
     """
 
 
+
 def Genome_slicer(filename):
     """Calls the read_test_data function to output slices genomes
     """
@@ -28,10 +29,31 @@ def Genome_slicer(filename):
     genome_a, genome_b, commone_genes = utilities.read_test_data(filename)
     return genome_a , genome_b, commone_genes
 
+
+
+
 def comparisons(genome_a , genome_b):
     """compares genomes the first genome to the second
     """
-    for range(len(str(genome_a)))
+#    genes_only = len(genome_a) - genome_a.count(' ')
+    count = 0
+    
+    for i in range(len(genome_a)):
+        for p in range(len(genome_b)):    
+            count += 1
+           
+            if genome_a[i] == genome_b[p]:
+                print(genome_a[i])
+                GeneList(genome_a[i])
+                item = GeneList(genome_a[i])
+                
+#                item = genome_a[i]
+                print(count)
+                GeneList.append(item)       #puts the common genome in GeneList
+                
+    
+    return GeneList
+                
     
 """
 Helper Functions
@@ -46,5 +68,14 @@ for range(len(genome)%16)   'loops the n amount of times there is a full genome
 2. add common genes to the back of a list/queue
 
 3. 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+a) make genomes into Gene items: g = Gene(genome_a)
+b) create GeneList:              Gene_List1 = GeneList()
+c) append Genes to the GL        Gene_List1.append(g)
+    
+use this to iterate
+
 
 """
