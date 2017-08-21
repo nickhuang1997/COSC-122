@@ -32,11 +32,22 @@ def Genome_slicer(filename):
 
 
 
+def Genome_to_GeneList(genome_a):
+    """Takes each sequence from each genomes and puts it into GeneList"""
+    
+    GL = GeneList()
+    for i in range(len(genome_a)):
+        GL.append(genome_a[i])                 #puts item genome_a[i] into GeneList
+    return GL
+
+
 def comparisons(genome_a , genome_b):
     """compares genomes the first genome to the second
     """
 #    genes_only = len(genome_a) - genome_a.count(' ')
     count = 0
+    GL1 = Genome_to_GeneList(genome_a)
+    GL2 = Genome_to_GeneList(genome_b)    
     
     for i in range(len(genome_a)):
         for p in range(len(genome_b)):    
@@ -53,11 +64,19 @@ def comparisons(genome_a , genome_b):
                 
     
     return GeneList
-                
-    
+                    
 """
 Helper Functions
 ----------------
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+a) make genomes into Gene items: g = Gene(genome_a)
+b) create GeneList:              Gene_List1 = GeneList()
+c) append Genes to the GL        Gene_List1.append(g)
+    
+use this to iterate
+
+
 
 1. break genes up into segments of 16  (extract strings of length 16)
   a)put the extracted strings into a list or bin
@@ -68,14 +87,5 @@ for range(len(genome)%16)   'loops the n amount of times there is a full genome
 2. add common genes to the back of a list/queue
 
 3. 
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-a) make genomes into Gene items: g = Gene(genome_a)
-b) create GeneList:              Gene_List1 = GeneList()
-c) append Genes to the GL        Gene_List1.append(g)
-    
-use this to iterate
-
 
 """
