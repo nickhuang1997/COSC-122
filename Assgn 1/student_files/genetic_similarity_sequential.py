@@ -48,23 +48,17 @@ def comparisons(genome_a , genome_b):
     count = 0
     GL1 = Genome_to_GeneList(genome_a)
     GL2 = Genome_to_GeneList(genome_b)    
+    Common_genes = GeneList()               #empty list for common genes
     
-    for i in range(len(genome_a)):
-        for p in range(len(genome_b)):    
+    for i in range(len(GL1)):
+        for p in range(len(GL2)):    
             count += 1
            
-            if genome_a[i] == genome_b[p]:
-                print(genome_a[i])
-                GeneList(genome_a[i])
-                item = GeneList(genome_a[i])
-                
-#                item = genome_a[i]
-                print(count)
-                GeneList.append(item)       #puts the common genome in GeneList
-                
+            if GL1[i] == GL2[p]:            #if the genes are the same
+                Common_genes.append(GL1[i])
     
-    return GeneList
-                    
+    return Common_genes, "it took " + str(count) + " comparisons total to find the common genes."
+                          
 """
 Helper Functions
 ----------------
