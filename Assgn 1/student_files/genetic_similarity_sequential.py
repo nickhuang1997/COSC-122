@@ -62,9 +62,21 @@ def comparisons(genome_a , genome_b):
            
             if GL1[i] == GL2[p]:            #if the genes are the same
                 Common_genes.append(GL1[i])
-    
+                break
+                
+                
     return Common_genes, count
-                          
+ 
+
+"""
+lines 223 - 239
+
+test_large_all_common_comparisons_exact (__main__.TestCommonGenesSequential) ... FAIL
+test_large_some_common_comparisons_exact (__main__.TestCommonGenesSequential) ... FAIL
+
+test_small_all_common_comparisons_exact (__main__.TestCommonGenesSequential) ... FAIL
+test_small_some_common_comparisons_exact (__main__.TestCommonGenesSequential) ... FAIL
+"""
 """
 Helper Functions
 ----------------
