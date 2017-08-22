@@ -19,6 +19,13 @@ def genetic_similarity_sequential(first_genome, second_genome):
         between first_genome and second_genome, while the integer is how many
         comparisons it took to find all the similar genes.
     """
+#    filename = 'TestData/test_data-2-1.txt'
+#    GA, GB, GC = Genome_slicer(filename)
+    
+    GA_list = Genome_to_GeneList(first_genome)
+    GB_list = Genome_to_GeneList(second_genome)
+    
+    return comparisons(GA_list, GB_list)
 
 
 
@@ -28,7 +35,6 @@ def Genome_slicer(filename):
     import utilities
     genome_a, genome_b, commone_genes = utilities.read_test_data(filename)
     return genome_a , genome_b, commone_genes
-
 
 
 
@@ -57,7 +63,7 @@ def comparisons(genome_a , genome_b):
             if GL1[i] == GL2[p]:            #if the genes are the same
                 Common_genes.append(GL1[i])
     
-    return Common_genes, "it took " + str(count) + " comparisons total to find the common genes."
+    return Common_genes, count
                           
 """
 Helper Functions
