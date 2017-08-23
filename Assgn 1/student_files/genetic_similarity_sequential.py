@@ -101,3 +101,5 @@ for range(len(genome)%16)   'loops the n amount of times there is a full genome
 3. 
 
 """
+a,b,c = Genome_slicer('TestData/test_data-10-0.txt')
+genetic_similarity_sequential(a,b)

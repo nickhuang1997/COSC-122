@@ -1,0 +1,43 @@
+seq 1
+aatctattcctggccctagtctcaaacgattcttcacacagaaagtagttgcagtatacaatatttgctaagactcctgttgtctgccccctcgctacccttctgaaaacaagagtgtaaagtaaataattattatacatcttcacagtcgccataacgt
+
+0: aatctattcctggccc <-
+1: tagtctcaaacgattc <--
+2: ttcacacagaaagtag
+3: ttgcagtatacaatat
+4: ttgctaagactcctgt
+5: tgtctgccccctcgct
+6: acccttctgaaaacaa
+7: gagtgtaaagtaaata
+8: attattatacatcttc
+9: acagtcgccataacgt
+
+
+seq 2
+aatctattcctggcccacagtcgccataacgtacccttctgaaaacaaattattatacatcttcgagtgtaaagtaaatatagtctcaaacgattctgtctgccccctcgctttcacacagaaagtagttgcagtatacaatatttgctaagactcctgt
+
+0: aatctattcctggccc
+1: acagtcgccataacgt
+2: acccttctgaaaacaa
+3: attattatacatcttc
+4: gagtgtaaagtaaata
+5: tagtctcaaacgattc <- 
+6: tgtctgccccctcgct
+7: ttcacacagaaagtag 
+8: ttgcagtatacaatat
+9: ttgctaagactcctgt
+
+
+common
+aatctattcctggccctagtctcaaacgattcttcacacagaaagtagttgcagtatacaatatttgctaagactcctgttgtctgccccctcgctacccttctgaaaacaagagtgtaaagtaaataattattatacatcttcacagtcgccataacgt
+
+aatctattcctggccc
+tagtctcaaacgattc
+ttcacacagaaagtag
+ttgcagtatacaatat
+ttgctaagactcctgt
+tgtctgccccctcgct
+acccttctgaaaacaa
+gagtgtaaagtaaata
+attattatacatcttc
+acagtcgccataacgt

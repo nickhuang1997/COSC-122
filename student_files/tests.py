@@ -266,9 +266,9 @@ class TestCommonGenesBinary(BaseTestCommonGenes):
 
 def all_tests_suite():
     suite = unittest.TestSuite()
-#    suite.addTest(unittest.makeSuite(TestCommonGenesSequential))
+    suite.addTest(unittest.makeSuite(TestCommonGenesSequential))
     # uncomment the next line when ready for binary testing
-    suite.addTest(unittest.makeSuite(TestCommonGenesBinary))
+    # suite.addTest(unittest.makeSuite(TestCommonGenesBinary))
     return suite
 
 
