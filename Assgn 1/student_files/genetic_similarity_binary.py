@@ -33,6 +33,7 @@ def Genome_slicer(filename):
     genome_a, genome_b, commone_genes = utilities.read_test_data(filename)
     return genome_a , genome_b, commone_genes
 
+
 def Genome_to_GeneList(genome_a):
     """Takes each sequence from each genomes and puts it into GeneList"""
     
@@ -41,26 +42,6 @@ def Genome_to_GeneList(genome_a):
         GL.append(genome_a[i])                 #puts item genome_a[i] into GeneList
     return GL
 
-
-def comparisons(genome_a , genome_b):
-    """compares genomes the first genome to the second
-    """
-#    genes_only = len(genome_a) - genome_a.count(' ')
-    count = 0
-    GL1 = Genome_to_GeneList(genome_a)
-    GL2 = Genome_to_GeneList(genome_b)    
-    Common_genes = GeneList()               #empty list for common genes
-    
-    for i in range(len(GL1)):
-        for p in range(len(GL2)):    
-            count += 1
-           
-            if GL1[i] == GL2[p]:            #if the genes are the same
-                Common_genes.append(GL1[i])
-                break
-                
-                
-    return Common_genes, count
 
 def binary_search(genome_a, genome_b):
     """uses a binary search to find common genomes genome_a and genome_b
