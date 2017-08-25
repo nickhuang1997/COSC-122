@@ -5,11 +5,7 @@ Author: Nicholas Huang
 A module to find the genetic similarity between two genomes.
 To find how many genes are in common, we use the naive sequential approach.
 """
-
-'TestData/test_data-2-1.txt'
 from classes import GeneList
-
-## Uncomment the following line to be able to make your own testing Genes
 from classes import Genome, Gene
 
 
@@ -22,84 +18,35 @@ def genetic_similarity_sequential(first_genome, second_genome):
 #    filename = 'TestData/test_data-2-1.txt'
 #    GA, GB, GC = Genome_slicer(filename)
     
-    GA_list = Genome_to_GeneList(first_genome)
-    GB_list = Genome_to_GeneList(second_genome)
+    genome_a_list = genome_to_genelist(first_genome)
+    genome_b_list = genome_to_genelist(second_genome)
     
-    return comparisons(GA_list, GB_list)
+    return comparisons(genome_a_list, genome_b_list)
 
 
-
-def Genome_slicer(filename):
-    """Calls the read_test_data function to output slices genomes
-    """
-    import utilities
-    genome_a, genome_b, commone_genes = utilities.read_test_data(filename)
-    return genome_a , genome_b, commone_genes
-
-
-
-def Genome_to_GeneList(genome_a):
+def genome_to_genelist(genome_a):
     """Takes each sequence from each genomes and puts it into GeneList"""
     
-    GL = GeneList()
+    initialgenelist = GeneList()
     for i in range(len(genome_a)):
-        GL.append(genome_a[i])                 #puts item genome_a[i] into GeneList
-    return GL
+        initialgenelist.append(genome_a[i])                 #puts item genome_a[i] into GeneList
+    return initialgenelist
 
 
-def comparisons(genome_a , genome_b):
+def comparisons(genome_a, genome_b):
     """compares genomes the first genome to the second
     """
 #    genes_only = len(genome_a) - genome_a.count(' ')
     count = 0
-    GL1 = Genome_to_GeneList(genome_a)
-    GL2 = Genome_to_GeneList(genome_b)    
-    Common_genes = GeneList()               #empty list for common genes
+    genelistone = genome_to_genelist(genome_a)
+    genelisttwo = genome_to_genelist(genome_b)    
+    common_genes = GeneList()               #empty list for common genes
     
-    for i in range(len(GL1)):
-        for p in range(len(GL2)):    
+    for i in range(len(genelistone)):
+        for secondgenome in range(len(genelisttwo)):    
             count += 1
            
-            if GL1[i] == GL2[p]:            #if the genes are the same
-                Common_genes.append(GL1[i])
-                break
-                
-                
-    return Common_genes, count
- 
-
-"""
-lines 223 - 239
-
-test_large_all_common_comparisons_exact (__main__.TestCommonGenesSequential) ... FAIL
-test_large_some_common_comparisons_exact (__main__.TestCommonGenesSequential) ... FAIL
-
-test_small_all_common_comparisons_exact (__main__.TestCommonGenesSequential) ... FAIL
-test_small_some_common_comparisons_exact (__main__.TestCommonGenesSequential) ... FAIL
-"""
-"""
-Helper Functions
-----------------
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-a) make genomes into Gene items: g = Gene(genome_a)
-b) create GeneList:              Gene_List1 = GeneList()
-c) append Genes to the GL        Gene_List1.append(g)
-    
-use this to iterate
-
-
-
-1. break genes up into segments of 16  (extract strings of length 16)
-  a)put the extracted strings into a list or bin
-
-for range(len(genome)%16)   'loops the n amount of times there is a full genome
- - use recursion and cut off the first 
-
-2. add common genes to the back of a list/queue
-
-3. 
-
-"""
-a,b,c = Genome_slicer('TestData/test_data-10-0.txt')
-genetic_similarity_sequential(a,b)
+            if genelistone[i] == genelisttwo[secondgenome]:            #if the genes are the same
+                common_genes.append(genelistone[i])
+                break               
+    return common_genes, count
