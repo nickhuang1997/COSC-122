@@ -362,13 +362,15 @@ class QuadraticHashTable():
             self._data[index] = item  #puts item there
         
         else:
-            
-
-            while self._data[index] is not None:               
-                index += 1
+            i = 0
+            while self._data[index] is not None:  
+                i += 1
+                index = (index + i**2)%self.n_slots
+                
                 if index%self.n_slots == 0:
                     index = 0
             self._data[index] = item
+        
         # ===end student section===
         self.n_items += 1
 
