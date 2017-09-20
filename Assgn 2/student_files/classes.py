@@ -195,7 +195,7 @@ class BaseGeneHashTable(ABC):
     @abstractmethod
     def __getitem__(self, gene):
         pass
-
+    
     @abstractmethod
     def insert(self, gene, disease):
         pass
