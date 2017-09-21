@@ -52,8 +52,8 @@ class ChainingGeneHashTable(BaseGeneHashTable):
     def insert(self, gene, disease):
         """inserts both the gene and disease name into a slot"""
         index = hash(gene) % self.n_slots
-        print(index)
-
+        
+        self.comparisons += 1
         if self.hash_table[index] == None:                  #cant get this to equal None
             print('no other things here')
             self.hash_table[index] = GeneLink((gene,disease))
@@ -62,9 +62,11 @@ class ChainingGeneHashTable(BaseGeneHashTable):
         else:   #if there is an item in the slot 
             temp = GeneLink((gene,disease))
             print(temp)
-            temp.next_node = self.head
+            print(temp.data)
+            temp.next_node = self.hash_table[index]
             self.hash_table[index] = temp
             
+
 
 #    def get(self, item):
 #        """finds the item in the hash table"""
