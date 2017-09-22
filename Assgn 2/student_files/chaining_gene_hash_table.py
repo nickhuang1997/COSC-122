@@ -9,7 +9,7 @@ To find how many genes are in common, we use the naive sequential approach.
 
 from classes import GeneLinkedList, GeneLink, BaseGeneHashTable
 ## Uncomment the following line to be able to make your own testing Genes
-# from classes import Gene
+from classes import Gene
 
 
 class ChainingGeneHashTable(BaseGeneHashTable):
@@ -51,21 +51,13 @@ class ChainingGeneHashTable(BaseGeneHashTable):
 #    @abstractmethod
     def insert(self, gene, disease):
         """inserts both the gene and disease name into a slot"""
-        index = hash(gene) % self.n_slots
+        index = hash(gene) % self.n_slots        
+        temp = GeneLink((gene,disease))
+        print(temp)
+        print(temp.data)
+        temp.next_node = self.hash_table[index]
+        self.hash_table[index] = temp
         
-        self.comparisons += 1
-        if self.hash_table[index] == None:                  #cant get this to equal None
-            print('no other things here')
-            self.hash_table[index] = GeneLink((gene,disease))
-            print('just inserted it')
-            
-        else:   #if there is an item in the slot 
-            temp = GeneLink((gene,disease))
-            print(temp)
-            print(temp.data)
-            temp.next_node = self.hash_table[index]
-            self.hash_table[index] = temp
-            
 
 
 #    def get(self, item):

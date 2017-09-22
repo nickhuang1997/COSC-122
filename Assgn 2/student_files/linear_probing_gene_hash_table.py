@@ -59,18 +59,12 @@ class LinearProbingGeneHashTable(BaseGeneHashTable):
         """inserts both the gene and disease name into a slot"""
         index = hash(gene) % self.n_slots
         print(index)
-
-        if self.hash_table[index] == None:                  #cant get this to equal None
-            self.hash_table[index] = (gene,disease)
+        while self.hash_table[index] != None:
+            index = (index + 1)%self.n_slots
+            self.comparisons += 1
+            if self.n_items == self.n_slots:
+                raise IndexError ("Hash table is full")
+                break
             self.n_items += 1
-            
-        else:   #if there is an item in the slot 
-            while self.hash_table[index] != None:
-                index = (index + 1)%self.n_slots
-                self.comparisons += 1
-                if self.n_items == self.n_slots:
-                    raise IndexError ("Hash table is full")
-                    break
-                self.n_items += 1
-            self.hash_table[index] = (gene,disease)            
+        self.hash_table[index] = (gene,disease)            
          
