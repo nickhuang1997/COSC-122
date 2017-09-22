@@ -206,3 +206,4 @@ class BaseGeneHashTable(ABC):
             results.append("  {}: {}".format(i, str(row)))
         results = [self.__class__.__name__ + "["] + results + ["]"]
         return "\n".join(results)
+ 

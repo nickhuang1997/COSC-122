@@ -25,12 +25,12 @@ class ChainingGeneHashTable(BaseGeneHashTable):
         """
         super().__init__(table_size)
         self.hash_table = [GeneLinkedList() for _ in range(table_size)]
+        
         self.n_slots = table_size
-        self.n_items = 0
+        
         self.comparisons = 0
         self.hashes = 0
         
-        self.head = None
         
      
     # ---start student section---
@@ -40,61 +40,32 @@ class ChainingGeneHashTable(BaseGeneHashTable):
         for i, row in enumerate(self.hash_table):
             results.append("  {}: {}".format(i, str(row)))
         results = [self.__class__.__name__ + "["] + results + ["]"]
-#        results += 'Number of comparisons \n '.format(self.comparisons)
         
         return "\n".join(results)
 
-#    @abstractmethod
     def __getitem__(self, gene):
-        pass
-    
-#    @abstractmethod
+        """finds the gene in the hash table"""
+        self.hashes += 1
+        index = hash(gene) % self.n_slots 
+        currenthead = self.hash_table[index].head
+        if currenthead != None:
+            while currenthead.next_node != None:
+                self.comparisons += 1
+                if currenthead.data[0] == gene:
+                    return currenthead.data[1]
+                currenthead = currenthead.next_node
+            self.comparisons += 1
+            if currenthead.data[0] == gene:
+                return currenthead.data[1]
+        return None
+            
+        
     def insert(self, gene, disease):
         """inserts both the gene and disease name into a slot"""
+        self.hashes += 1
         index = hash(gene) % self.n_slots        
-        temp = GeneLink((gene,disease))
-        print(temp)
-        print(temp.data)
-        temp.next_node = self.hash_table[index]
-        self.hash_table[index] = temp
         
-
-
-#    def get(self, item):
-#        """finds the item in the hash table"""
-#        
-#        startslot = self._hash(item)
-#        
-#        data = None
-#        stop = False
-#        found = False
-#        position = startslot
-#        while self.hash_table[position] != None and not found and not stop:
-#            if self.hash_table[position] == item:
-#                found = True
-#                data = self.hash_table[position]
-#            else:
-#                position = self.has
-#                if position == startslot:
-#                    stop = True
-#        return data
-#        
-#def get(self,key):
-#  startslot = self.hashfunction(key,len(self.slots))
-#
-#  data = None
-#  stop = False
-#  found = False
-#  position = startslot
-#  while self.slots[position] != None and  \
-#                       not found and not stop:
-#     if self.slots[position] == key:
-#       found = True
-#       data = self.data[position]
-#     else:
-#       position=self.rehash(position,len(self.slots))
-#       if position == startslot:
-#           stop = True
-#  return data
-#        
-#        
+        temp = GeneLink((gene,disease))
+        temp.next_node = self.hash_table[index].head
+        self.hash_table[index].head = temp
+        

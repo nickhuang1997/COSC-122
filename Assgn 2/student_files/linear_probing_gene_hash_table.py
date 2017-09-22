@@ -25,8 +25,9 @@ class LinearProbingGeneHashTable(BaseGeneHashTable):
         super().__init__(table_size)
         self.hash_table = [None] * table_size
         self.n_slots = table_size
-        self.n_items = 0
         self.comparisons = 0
+        self.hashes = 0
+        self.n_items = 0
     # ---start student section---
         
     def __str__(self):
@@ -41,30 +42,38 @@ class LinearProbingGeneHashTable(BaseGeneHashTable):
 #    @abstractmethod
     def __getitem__(self, gene):
         
-        i = 0
+        
         found = False
-        while found == False:
-            self.comparisons += 1
-            if self.hash_table[i][0] == gene:   #works when its the right Gene, error if wrong
-                found = True
-                return self.hash_table[i][1]
-            
-            if i == self.n_slots:
-                break
-                return None
-            i += 1
-                
+        self.hashes += 1
+        index =  hash(gene) % self.n_slots
+        
+        self.comparisons += 1
+        if self.hash_table[index][0] == gene:
+            return self.hash_table[index][0]
+        
+        else:
+            while found == False:
+                self.comparisons += 1
+                if self.hash_table[index][0] == gene:   #works when its the right Gene, error if wrong
+                    found = True
+                    return self.hash_table[index][1]
+               
+                if index == (self.n_slots-1):
+                    break
+                    return None
+                index += 1
+                    
 #    @abstractmethod
     def insert(self, gene, disease):
         """inserts both the gene and disease name into a slot"""
+        self.hashes += 1
         index = hash(gene) % self.n_slots
-        print(index)
         while self.hash_table[index] != None:
             index = (index + 1)%self.n_slots
-            self.comparisons += 1
+            
             if self.n_items == self.n_slots:
                 raise IndexError ("Hash table is full")
                 break
-            self.n_items += 1
-        self.hash_table[index] = (gene,disease)            
-         
+        self.hash_table[index] = (gene,disease)   
+        self.n_items += 1         
+        

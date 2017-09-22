@@ -344,9 +344,9 @@ class TestGeneLookupLinearProbing(BaseTestGeneLookup):
 
 def all_tests_suite():
     suite = unittest.TestSuite()
-    suite.addTest(unittest.makeSuite(TestGeneLookupChaining))
+    #suite.addTest(unittest.makeSuite(TestGeneLookupChaining))
     # uncomment the next line when ready for linear probing
-    # suite.addTest(unittest.makeSuite(TestGeneLookupLinearProbing))
+    suite.addTest(unittest.makeSuite(TestGeneLookupLinearProbing))
     return suite
 
 
