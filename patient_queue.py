@@ -6,7 +6,7 @@ Maintain a patient queue that sorts patients based on the diseases
 they have been diagnosed with, and the duration of time since the
 diagnosis.
 """
-
+#https://bradfieldcs.com/algos/trees/priority-queues-with-binary-heaps/ 
 from classes import PriorityQueue, Patient
 from utilities import *
 from patient_queue import *
@@ -87,7 +87,16 @@ class PatientHeapQueue(PriorityQueue):
         """ Move the patient at the given index into the correct location
             further down in the heap by swapping with its children if appropriate.
         """
-        pass
+        right_spot = False
+        childs = self._child_indices(index)      
+        big_brother_index = self._max_child_priority_index(childs)
+        
+        while right_spot == False:
+            self.comparisons += 1
+            if self.data[index-1].priority < self.data[big_brother_index].priority:
+                self._swap(index, big_brother_index)
+            else:
+                right_spot = True        
 
     def _heapify(self, data):
         """ Turn the existing data into a heap in O(n log n) time.
@@ -116,6 +125,8 @@ class PatientHeapQueue(PriorityQueue):
         """
         item_off = self.data[0]
         new_list = self.data[1:]
+        
+        
         self.data = new_list
         return item_off
 
