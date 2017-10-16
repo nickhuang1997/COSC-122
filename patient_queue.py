@@ -77,7 +77,7 @@ class PatientHeapQueue(PriorityQueue):
         
         while right_spot == False:
             self.comparisons += 1
-            if self.data[index].priority > self.data[parent_index].priority:
+            if self.data[index-1].priority > self.data[parent_index].priority:
                 self._swap(index, parent_index)
             else:
                 right_spot = True
@@ -105,11 +105,19 @@ class PatientHeapQueue(PriorityQueue):
         """
         # We first make sure that we're only including Patients
         assert isinstance(patient, Patient)
-
+        
+        self.data.insert(len(self.data), patient) #puts item at end of data list
+        self._sift_up(len(self.data))             #moves patient to appropriate spot
+        
+               
+        
     def dequeue(self):
         """ Take a patient off the queue and return the Patient object
         """
-        pass
+        item_off = self.data[0]
+        new_list = self.data[1:]
+        self.data = new_list
+        return item_off
 
 
 class EditablePatientHeapQueue(PatientHeapQueue):
