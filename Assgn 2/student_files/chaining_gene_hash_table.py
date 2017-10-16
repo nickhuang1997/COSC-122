@@ -65,7 +65,7 @@ class ChainingGeneHashTable(BaseGeneHashTable):
         self.hashes += 1
         index = hash(gene) % self.n_slots        
         
-        temp = GeneLink((gene,disease))
+        temp = GeneLink((gene, disease))
         temp.next_node = self.hash_table[index].head
         self.hash_table[index].head = temp
         

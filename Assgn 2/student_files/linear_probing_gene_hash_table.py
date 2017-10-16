@@ -45,22 +45,23 @@ class LinearProbingGeneHashTable(BaseGeneHashTable):
         
         found = False
         self.hashes += 1
-        index =  hash(gene) % self.n_slots
+        index = hash(gene) % self.n_slots
         
         self.comparisons += 1
         if self.hash_table[index][0] == gene:
-            return self.hash_table[index][0]
+            return self.hash_table[index][1]
         
         else:
-            while found == False:
+            while found is False:
+                if index == (self.n_slots-1):
+                    
+                    return None
                 self.comparisons += 1
-                if self.hash_table[index][0] == gene:   #works when its the right Gene, error if wrong
+                if self.hash_table[index][0] == gene: #works when its the right Gene, error if wrong
                     found = True
                     return self.hash_table[index][1]
                
-                if index == (self.n_slots-1):
-                    break
-                    return None
+                
                 index += 1
                     
 #    @abstractmethod
@@ -72,8 +73,8 @@ class LinearProbingGeneHashTable(BaseGeneHashTable):
             index = (index + 1)%self.n_slots
             
             if self.n_items == self.n_slots:
-                raise IndexError ("Hash table is full")
-                break
-        self.hash_table[index] = (gene,disease)   
+                raise IndexError("Hash table is full")
+                
+        self.hash_table[index] = (gene, disease)   
         self.n_items += 1         
         
