@@ -78,7 +78,7 @@ class PatientHeapQueue(PriorityQueue):
         while right_spot == False:
             self.comparisons += 1
             if self.data[index-1].priority > self.data[parent_index].priority:
-                self._swap(index, parent_index)
+                self._swap(index-1, parent_index)
             else:
                 right_spot = True
         
@@ -91,10 +91,22 @@ class PatientHeapQueue(PriorityQueue):
         childs = self._child_indices(index)      
         big_brother_index = self._max_child_priority_index(childs)
         
+        print(childs)
+        print(big_brother_index) #this is none?
+        print(index)
+        
         while right_spot == False:
             self.comparisons += 1       #swap with the lesser one
-            if self.data[index-1].priority < self.data[big_brother_index].priority:
+            if self.data[index].priority < self.data[big_brother_index].priority:
                 self._swap(index, big_brother_index)
+                
+                index = big_brother_index
+                print('test')
+                print(index)
+                childs = self._child_indices(index)
+                print('childs index' + str(childs))
+                big_brother_index = self._max_child_priority_index(childs)
+                print('big bro index' + str(big_brother_index))
             else:
                 right_spot = True        
 
@@ -132,6 +144,7 @@ class PatientHeapQueue(PriorityQueue):
         self.data[0] = last_item
         new_list = self.data[:-1]
         
+        self.data = new_list
         self._sift_down(0) #sifted item should always be 
         
         return dequeued_item
