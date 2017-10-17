@@ -6,9 +6,10 @@ Maintain a patient queue that sorts patients based on the diseases
 they have been diagnosed with, and the duration of time since the
 diagnosis.
 """
-
+#https://bradfieldcs.com/algos/trees/priority-queues-with-binary-heaps/ 
 from classes import PriorityQueue, Patient
-
+from utilities import *
+from patient_queue import *
 
 class PatientHeapQueue(PriorityQueue):
     """ Implement a queue structure using a 0-indexed heap.
@@ -71,13 +72,31 @@ class PatientHeapQueue(PriorityQueue):
         """ Move the patient at the given index into the correct location
             further up in the heap by swapping with its parents if appropriate.
         """
-        pass
+        right_spot = False
+        parent_index = self._parent_index(index)
+        
+        while right_spot == False:
+            self.comparisons += 1
+            if self.data[index-1].priority > self.data[parent_index].priority:
+                self._swap(index, parent_index)
+            else:
+                right_spot = True
+        
 
     def _sift_down(self, index):
         """ Move the patient at the given index into the correct location
             further down in the heap by swapping with its children if appropriate.
         """
-        pass
+        right_spot = False
+        childs = self._child_indices(index)      
+        big_brother_index = self._max_child_priority_index(childs)
+        
+        while right_spot == False:
+            self.comparisons += 1       #swap with the lesser one
+            if self.data[index-1].priority < self.data[big_brother_index].priority:
+                self._swap(index, big_brother_index)
+            else:
+                right_spot = True        
 
     def _heapify(self, data):
         """ Turn the existing data into a heap in O(n log n) time.
@@ -95,11 +114,27 @@ class PatientHeapQueue(PriorityQueue):
         """
         # We first make sure that we're only including Patients
         assert isinstance(patient, Patient)
-
+        
+        self.data.insert(len(self.data), patient) #puts item at end of data list
+        self._sift_up(len(self.data))             #moves patient to appropriate spot
+        
+               
+        
     def dequeue(self):
         """ Take a patient off the queue and return the Patient object
+        
+        remove the first node
+        put last node in its place
+        sift that node down        
         """
-        pass
+        dequeued_item = self.data[0]
+        last_item = self.data[-1]
+        self.data[0] = last_item
+        new_list = self.data[:-1]
+        
+        self._sift_down(0) #sifted item should always be 
+        
+        return dequeued_item
 
 
 class EditablePatientHeapQueue(PatientHeapQueue):
